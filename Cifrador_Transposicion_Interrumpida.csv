@@ -1,0 +1,39 @@
+CIFRADOR DE TRANSPOSICIÓN INTERRUMPIDA
+=================================================
+
+ENTRADA DE DATOS:
+Texto Original,ESTA ES una prueba de tonteo
+Palabra clave,Convenience
+
+=================================================
+CLAVE NUMÉRICA:
+=================================================
+Posición,1,2,3,4,5,6,7,8,9,10,11
+Letra Clave,C,O,N,V,E,N,I,E,N,C,E
+Número,1,10,7,11,3,8,6,4,9,2,5
+
+=================================================
+TEXTO EN LLANO (sin espacios):
+=================================================
+ESTAESUNAPRUABADETONTEO
+
+=================================================
+MATRIZ LLENADA (Clave Numérica):
+=================================================
+Número,1,10,7,11,3,8,6,4,9,2,5
+Fila 1,E,S,T,A,E,S,U,N,A,P,R
+Fila 2,U,A,B,A,D,E,T,O,N,T,E
+Fila 3,O
+
+=================================================
+MATRIZ REORGANIZADA (Orden: 1,2,3,4,5,6,7,8,9,10,11):
+=================================================
+Orden,1,2,3,4,5,6,7,8,9,10,11
+Fila 1,E,P,E,N,R,U,T,S,A,S,A
+Fila 2,U,T,D,O,E,T,B,A,N,A,E
+Fila 3,O
+
+=================================================
+TEXTO CIFRADO (leyendo columna por columna):
+=================================================
+Cripto: EUOPTA EDOENTNOTBAANESTSAAETUSA
