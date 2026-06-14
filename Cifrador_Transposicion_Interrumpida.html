@@ -1,0 +1,217 @@
+<html xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="UTF-8">
+<style>
+td { border: 1px solid black; padding: 5px; font-family: Arial; }
+.titulo { font-weight: bold; font-size: 14pt; background-color: #4472C4; color: white; }
+.encabezado { font-weight: bold; background-color: #D9E1F2; }
+.entrada { background-color: #FFF2CC; }
+.resultado { background-color: #E2EFDA; font-weight: bold; }
+</style>
+</head>
+<body>
+<table cellpadding="10" cellspacing="0">
+<tr>
+<td colspan="12" class="titulo">CIFRADOR DE TRANSPOSICIÓN INTERRUMPIDA</td>
+</tr>
+
+<tr><td colspan="12"></td></tr>
+
+<tr>
+<td class="encabezado">Texto Original:</td>
+<td class="entrada" colspan="11"><input type="text" id="textoOriginal" value="ESTA ES una prueba de tonteo" style="width:100%; padding:5px;"></td>
+</tr>
+
+<tr>
+<td class="encabezado">Palabra clave:</td>
+<td class="entrada" colspan="11"><input type="text" id="palabraClave" value="Convenience" style="width:100%; padding:5px;"></td>
+</tr>
+
+<tr><td colspan="12"><button onclick="calcularCifrador()" style="padding:10px; font-size:12pt; cursor:pointer;">CALCULAR CIFRADOR</button></td></tr>
+
+<tr><td colspan="12"></td></tr>
+
+<tr>
+<td colspan="12" class="encabezado">CLAVE NUMÉRICA</td>
+</tr>
+
+<tr>
+<td class="encabezado">Posición</td>
+<td class="encabezado">1</td>
+<td class="encabezado">2</td>
+<td class="encabezado">3</td>
+<td class="encabezado">4</td>
+<td class="encabezado">5</td>
+<td class="encabezado">6</td>
+<td class="encabezado">7</td>
+<td class="encabezado">8</td>
+<td class="encabezado">9</td>
+<td class="encabezado">10</td>
+<td class="encabezado">11</td>
+</tr>
+
+<tr>
+<td class="encabezado">Letra Clave</td>
+<td id="l1"></td><td id="l2"></td><td id="l3"></td><td id="l4"></td><td id="l5"></td>
+<td id="l6"></td><td id="l7"></td><td id="l8"></td><td id="l9"></td><td id="l10"></td><td id="l11"></td>
+</tr>
+
+<tr>
+<td class="encabezado">Número</td>
+<td id="n1"></td><td id="n2"></td><td id="n3"></td><td id="n4"></td><td id="n5"></td>
+<td id="n6"></td><td id="n7"></td><td id="n8"></td><td id="n9"></td><td id="n10"></td><td id="n11"></td>
+</tr>
+
+<tr><td colspan="12"></td></tr>
+
+<tr>
+<td colspan="12" class="encabezado">TEXTO EN LLANO</td>
+</tr>
+
+<tr>
+<td class="encabezado">Texto sin espacios:</td>
+<td class="entrada" colspan="11" id="textoLlano"></td>
+</tr>
+
+<tr><td colspan="12"></td></tr>
+
+<tr>
+<td colspan="12" class="encabezado">MATRIZ LLENADA</td>
+</tr>
+
+<tr>
+<td class="encabezado">Número</td>
+<td id="mn1" class="encabezado"></td><td id="mn2" class="encabezado"></td><td id="mn3" class="encabezado"></td>
+<td id="mn4" class="encabezado"></td><td id="mn5" class="encabezado"></td><td id="mn6" class="encabezado"></td>
+<td id="mn7" class="encabezado"></td><td id="mn8" class="encabezado"></td><td id="mn9" class="encabezado"></td>
+<td id="mn10" class="encabezado"></td><td id="mn11" class="encabezado"></td>
+</tr>
+
+<tr>
+<td class="encabezado">Fila 1</td>
+<td id="mf1c1"></td><td id="mf1c2"></td><td id="mf1c3"></td><td id="mf1c4"></td><td id="mf1c5"></td>
+<td id="mf1c6"></td><td id="mf1c7"></td><td id="mf1c8"></td><td id="mf1c9"></td><td id="mf1c10"></td><td id="mf1c11"></td>
+</tr>
+
+<tr>
+<td class="encabezado">Fila 2</td>
+<td id="mf2c1"></td><td id="mf2c2"></td><td id="mf2c3"></td><td id="mf2c4"></td><td id="mf2c5"></td>
+<td id="mf2c6"></td><td id="mf2c7"></td><td id="mf2c8"></td><td id="mf2c9"></td><td id="mf2c10"></td><td id="mf2c11"></td>
+</tr>
+
+<tr>
+<td class="encabezado">Fila 3</td>
+<td id="mf3c1"></td><td id="mf3c2"></td><td id="mf3c3"></td><td id="mf3c4"></td><td id="mf3c5"></td>
+<td id="mf3c6"></td><td id="mf3c7"></td><td id="mf3c8"></td><td id="mf3c9"></td><td id="mf3c10"></td><td id="mf3c11"></td>
+</tr>
+
+<tr><td colspan="12"></td></tr>
+
+<tr>
+<td colspan="12" class="encabezado">MATRIZ REORGANIZADA</td>
+</tr>
+
+<tr>
+<td class="encabezado">Orden</td>
+<td class="encabezado">1</td><td class="encabezado">2</td><td class="encabezado">3</td><td class="encabezado">4</td>
+<td class="encabezado">5</td><td class="encabezado">6</td><td class="encabezado">7</td><td class="encabezado">8</td>
+<td class="encabezado">9</td><td class="encabezado">10</td><td class="encabezado">11</td>
+</tr>
+
+<tr>
+<td class="encabezado">Fila 1</td>
+<td id="rf1c1"></td><td id="rf1c2"></td><td id="rf1c3"></td><td id="rf1c4"></td><td id="rf1c5"></td>
+<td id="rf1c6"></td><td id="rf1c7"></td><td id="rf1c8"></td><td id="rf1c9"></td><td id="rf1c10"></td><td id="rf1c11"></td>
+</tr>
+
+<tr>
+<td class="encabezado">Fila 2</td>
+<td id="rf2c1"></td><td id="rf2c2"></td><td id="rf2c3"></td><td id="rf2c4"></td><td id="rf2c5"></td>
+<td id="rf2c6"></td><td id="rf2c7"></td><td id="rf2c8"></td><td id="rf2c9"></td><td id="rf2c10"></td><td id="rf2c11"></td>
+</tr>
+
+<tr>
+<td class="encabezado">Fila 3</td>
+<td id="rf3c1"></td><td id="rf3c2"></td><td id="rf3c3"></td><td id="rf3c4"></td><td id="rf3c5"></td>
+<td id="rf3c6"></td><td id="rf3c7"></td><td id="rf3c8"></td><td id="rf3c9"></td><td id="rf3c10"></td><td id="rf3c11"></td>
+</tr>
+
+<tr><td colspan="12"></td></tr>
+
+<tr>
+<td class="encabezado">TEXTO CIFRADO:</td>
+<td class="resultado" colspan="11" id="textoCifrado"></td>
+</tr>
+
+</table>
+
+<script>
+function calcularCifrador() {
+  const textoOriginal = document.getElementById('textoOriginal').value.toUpperCase();
+  const palabraClave = document.getElementById('palabraClave').value.toUpperCase();
+  const numLetras = palabraClave.length;
+  
+  // 1. Mostrar letras de la clave
+  for (let i = 0; i < numLetras; i++) {
+    document.getElementById('l' + (i+1)).textContent = palabraClave[i];
+  }
+  
+  // 2. Calcular números (orden alfabético)
+  let numeros = [];
+  for (let i = 0; i < numLetras; i++) {
+    let pos = 1;
+    for (let j = 0; j < numLetras; j++) {
+      if (palabraClave[j] < palabraClave[i]) pos++;
+      else if (palabraClave[j] === palabraClave[i] && j < i) pos++;
+    }
+    numeros.push(pos);
+    document.getElementById('n' + (i+1)).textContent = pos;
+  }
+  
+  // 3. Texto en llano (sin espacios)
+  const textoLlano = textoOriginal.replace(/ /g, '');
+  document.getElementById('textoLlano').textContent = textoLlano;
+  
+  // 4. Matriz llenada
+  for (let col = 0; col < numLetras; col++) {
+    document.getElementById('mn' + (col+1)).textContent = numeros[col];
+    for (let fila = 0; fila < 3; fila++) {
+      const idx = fila * numLetras + col;
+      const letra = idx < textoLlano.length ? textoLlano[idx] : '';
+      document.getElementById('mf' + (fila+1) + 'c' + (col+1)).textContent = letra;
+    }
+  }
+  
+  // 5. Matriz reorganizada
+  let matrizReorganizada = [[], [], []];
+  for (let ordenPos = 1; ordenPos <= numLetras; ordenPos++) {
+    const colOriginal = numeros.indexOf(ordenPos);
+    for (let fila = 0; fila < 3; fila++) {
+      const letra = document.getElementById('mf' + (fila+1) + 'c' + (colOriginal+1)).textContent;
+      matrizReorganizada[fila].push(letra);
+      document.getElementById('rf' + (fila+1) + 'c' + ordenPos).textContent = letra;
+    }
+  }
+  
+  // 6. Texto cifrado (leyendo columna por columna)
+  let textoCifrado = '';
+  for (let col = 0; col < numLetras; col++) {
+    for (let fila = 0; fila < 3; fila++) {
+      textoCifrado += matrizReorganizada[fila][col];
+    }
+  }
+  document.getElementById('textoCifrado').textContent = textoCifrado;
+}
+
+// Calcular al cargar
+window.onload = function() {
+  calcularCifrador();
+};
+
+// Recalcular cuando cambie el texto
+document.getElementById('textoOriginal').addEventListener('input', calcularCifrador);
+document.getElementById('palabraClave').addEventListener('input', calcularCifrador);
+</script>
+
+</body>
+</html>
