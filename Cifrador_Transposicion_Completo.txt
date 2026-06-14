@@ -1,0 +1,139 @@
+INSTRUCCIONES PARA CREAR EL EXCEL MANUALMENTE EN EXCEL 2024
+============================================================
+
+Como no puedo crear un archivo .xlsx binario directamente, aquí te paso las instrucciones EXACTAS para que lo hagas en tu Excel:
+
+=============================================================
+PASO 1: CREAR LA ESTRUCTURA BASE
+=============================================================
+
+Crea estas secciones en tu hoja:
+
+Fila 1: CIFRADOR DE TRANSPOSICIÓN INTERRUMPIDA
+
+Fila 3:
+  A3: "Texto Original:"
+  B3: [AQUÍ IRÁN TUS DATOS DE ENTRADA - editable]
+  
+Fila 4:
+  A4: "Palabra clave:"
+  B4: [AQUÍ IRÁN TUS DATOS DE ENTRADA - editable]
+
+=============================================================
+PASO 2: CREAR LA SECCIÓN DE CLAVE NUMÉRICA
+=============================================================
+
+Fila 6: "CLAVE NUMÉRICA"
+
+Fila 7 (encabezados):
+  A7: "Posición"
+  B7: "1"
+  C7: "2"
+  ... hasta L7: "11" (para 11 letras de "Convenience")
+
+Fila 8:
+  A8: "Letra Clave"
+  B8: =MID($B$4,1,1)  [extrae la 1ª letra de la palabra clave]
+  C8: =MID($B$4,2,1)  [extrae la 2ª letra]
+  D8: =MID($B$4,3,1)  [extrae la 3ª letra]
+  ... continúa hasta L8: =MID($B$4,11,1)
+
+Fila 9:
+  A9: "Número"
+  B9 en adelante: AQUÍ IRÁN LAS FÓRMULAS QUE CALCULAN EL ORDEN
+
+=============================================================
+PASO 3: FÓRMULA PARA CALCULAR EL NÚMERO DE CADA LETRA (LA MÁS IMPORTANTE)
+=============================================================
+
+Esta es la fórmula compleja que calcula qué número recibe cada letra según su posición alfabética:
+
+B9: =COUNTIF($B$8:L$8,"<"&B8)+COUNTIFS($B$8:L$8,B8,$B$7:L$7,"<"&COLUMN(B8))+1
+
+Explicación:
+- COUNTIF($B$8:L$8,"<"&B8): Cuenta cuántas letras en la clave son menores alfabéticamente que la letra actual
+- COUNTIFS(...): Si hay letras iguales, cuenta cuál posición tiene
+- +1: Suma 1 porque los números empiezan en 1, no en 0
+
+Copia esta fórmula desde B9 hasta L9
+
+=============================================================
+PASO 4: CREAR TEXTO EN LLANO (sin espacios)
+=============================================================
+
+Fila 11:
+  A11: "Texto en Llano:"
+  B11: =SUBSTITUTE($B$3," ","")
+  [Esta fórmula elimina todos los espacios del Texto Original]
+
+=============================================================
+PASO 5: CREAR LA MATRIZ LLENADA
+=============================================================
+
+Fila 13: "MATRIZ LLENADA (Organizando el texto bajo la clave)"
+
+Fila 14 (encabezado):
+  A14: "Número"
+  B14: 1, C14: 10, D14: 7, ... (copiar los números de la fila 9)
+
+Fila 15 en adelante (las filas del texto):
+  A15: "Fila 1"
+  B15: =IF(COLUMN()-1<=(LEN($B$11)),MID($B$11,COLUMN()-1,1),"")
+  C15: =IF(COLUMN()-1<=(LEN($B$11)),MID($B$11,COLUMN()-1,1),"")
+  ... copia hasta L15
+
+  A16: "Fila 2"
+  B16: =IF((COLUMN()-1)+11<=(LEN($B$11)),MID($B$11,(COLUMN()-1)+11,1),"")
+  ... copia hasta L16
+  
+  A17: "Fila 3"
+  B17: =IF((COLUMN()-1)+22<=(LEN($B$11)),MID($B$11,(COLUMN()-1)+22,1),"")
+  ... copia hasta L17
+
+=============================================================
+PASO 6: CREAR LA MATRIZ REORGANIZADA
+=============================================================
+
+Fila 19: "MATRIZ REORGANIZADA (Reordenada por números)"
+
+Fila 20 (encabezado con números en orden):
+  A20: "Orden"
+  B20 a L20: Números 1,2,3,4,5,6,7,8,9,10,11 (EN ORDEN ASCENDENTE)
+
+Fila 21 en adelante:
+  Usa VLOOKUP o INDEX/MATCH para buscar cada columna original
+  en la matriz llenada según el número correspondiente
+
+=============================================================
+PASO 7: TEXTO CIFRADO
+=============================================================
+
+Fila 24: "Cripto:"
+
+B24: =CONCATENATE(B21,B22,B23,C21,C22,C23,D21,D22,D23,...L21,L22,L23)
+
+O más simple:
+B24: =""&B21&B22&B23&C21&C22&C23&D21&D22&D23&...
+
+=============================================================
+PASO 8: DESCIFRADOR
+=============================================================
+
+Para descifrar, el proceso es INVERSO:
+- Tomas el texto cifrado
+- Divides en columnas según la clave original
+- Reorganizas según los números
+- Lees fila por fila
+
+Si necesitas ayuda específica con esta parte, avísame.
+
+============================================================
+CONSEJOS FINALES:
+============================================================
+
+1. Usa colores para diferenciar secciones (Verde para entrada, Azul para cálculos, Rojo para resultado)
+2. Congela los encabezados para que sea más fácil ver mientras desplazas
+3. Valida que el número de columnas coincida con la longitud de la clave
+4. Prueba con el ejemplo: "ESTA ES una prueba de tonteo" + clave "Convenience"
+
+¿Necesitas que te explique alguna fórmula en detalle?
